@@ -7,5 +7,22 @@
         "psr-4": {
             "Codzo\\": "deploy/src/Codzo"
         }
-    }
+    },
+    "repositories": [{
+        "type": "package",
+        "package": {
+            "name": "codzo/28Degree",
+            "version": "dev-master",
+            "source": {
+                "url": "git@github.com:codzo/28Degree.git",
+                "type": "git",
+                "reference": "master"
+            },
+            "autoload": {
+                "psr-0" : {
+                    "Codzo\\28Degree" : "src"
+                }
+            }
+        }
+    }]
 }
