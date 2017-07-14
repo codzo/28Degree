@@ -1,5 +1,10 @@
-=28Degree Gadget=
+# 28Degree Gadget
 
-PHP library to interact with 28Degree Credit Card.
+PHP library to interact with 28Degree Credit Card. 
 28Degree Credit Card website is https://28degrees-online.latitudefinancial.com.au
 
+## Install
+Recommanded to install by composer.
+```
+composer require codzo/28degree
+```
