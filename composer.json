@@ -11,16 +11,16 @@
     "repositories": [{
         "type": "package",
         "package": {
-            "name": "codzo/28Degree",
+            "name": "codzo/Platinum28Degree",
             "version": "dev-master",
             "source": {
-                "url": "git@github.com:codzo/28Degree.git",
+                "url": "git@github.com:codzo/Platinum28Degree.git",
                 "type": "git",
                 "reference": "master"
             },
             "autoload": {
                 "psr-0" : {
-                    "Codzo\\28Degree" : "src"
+                    "Codzo\\Platinum28Degree" : "src"
                 }
             }
         }
