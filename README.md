@@ -6,5 +6,5 @@ PHP library to interact with 28Degree Credit Card.
 ## Install
 Recommanded to install by composer.
 ```
-composer require codzo/28degree
+composer require codzo/platinum28degree
 ```
