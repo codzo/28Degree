@@ -13,20 +13,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codzo/Config.git",
-                "reference": "cb3addab917a00f5d28e334e76d681dcc4906ee9"
+                "reference": "56136bf44f5fad14d3ae7d4eaf9f1e0fd96e99e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codzo/Config/zipball/e87000ef81381c1724744af1bb8e05983095c4c1",
-                "reference": "cb3addab917a00f5d28e334e76d681dcc4906ee9",
+                "url": "https://api.github.com/repos/codzo/Config/zipball/56136bf44f5fad14d3ae7d4eaf9f1e0fd96e99e3",
+                "reference": "56136bf44f5fad14d3ae7d4eaf9f1e0fd96e99e3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.1",
-                "squizlabs/php_codesniffer": "*"
+                "codzo/phpcodesniffer-git-hook": "*",
+                "phpunit/phpunit": "^6.1"
             },
             "type": "library",
             "autoload": {
@@ -52,7 +52,7 @@
                 "config",
                 "setting"
             ],
-            "time": "2017-08-17 06:58:31"
+            "time": "2017-08-26 15:49:41"
         }
     ],
     "packages-dev": [

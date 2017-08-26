@@ -76,7 +76,6 @@ class Platinum28Degree
         curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie_file);
 
         $config = new Config(__DIR__ . '/../../../config');
-        $config->load();
 
         // get and set cookies
         curl_setopt($ch, CURLOPT_URL, self::URL_ACCESS);
