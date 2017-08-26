@@ -1,7 +1,8 @@
 tags
 vendor
-deploy/config/*
-!deploy/config/sample.*.php
+reports
+config/*
+!config/*.dist
 
 .DS_Store
 .*.swp

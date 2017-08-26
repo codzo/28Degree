@@ -1,0 +1,7 @@
+<?php
+return array(
+    'app' => array(
+        'username' => 'USERNAME',
+        'password' => 'PASSWORD'
+    )
+);
