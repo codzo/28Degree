@@ -23,9 +23,8 @@ See `config/app.php.dist` for reference.
 $pd = new \Codzo\Platinum28Degree\Platinum28Degree();
 
 // update cache, omit if you have a cronjob setup
-$pd->updateCache();
+$pd->loadContent();
 
 $account_summary = $pd->getAccountSummary();
 $transactions    = $pd->getLatestTransactions();
-$cache_mtime     = $pd->getCacheMTime();
 ```
