@@ -1,7 +1,19 @@
 <?php
 return array(
     'app' => array(
+        // credential to logon the 28-Degree website 
         'username' => 'USERNAME',
         'password' => 'PASSWORD'
+    ),
+    'cache' => array(
+        // enable cache?
+        'enabled'   => true,
+
+        // directory where cache files are stored
+        'directory' => __DIR__ . '/../data/cache',
+
+        // After how long would a cache expire. Number in seconds.
+        // Default to 1 day (84600 seconds).
+        'life-time' => 84600
     )
 );
