@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/codzo/Config.git",
-                "reference": "e3bb84107c2466efc6fefc9dea990ec247181122"
+                "reference": "3791286fae8fab90cbc99cd796decbbb96c5de39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codzo/Config/zipball/e3bb84107c2466efc6fefc9dea990ec247181122",
-                "reference": "e3bb84107c2466efc6fefc9dea990ec247181122",
+                "url": "https://api.github.com/repos/codzo/Config/zipball/3791286fae8fab90cbc99cd796decbbb96c5de39",
+                "reference": "3791286fae8fab90cbc99cd796decbbb96c5de39",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 "config",
                 "setting"
             ],
-            "time": "2017-08-26 16:07:56"
+            "time": "2017-10-19 06:28:37"
         }
     ],
     "packages-dev": [
