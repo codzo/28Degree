@@ -2,6 +2,7 @@
 namespace Codzo\Platinum28Degree;
 
 use PHPUnit\Framework\TestCase;
+use Codzo\Config\Config;
 use Codzo\Platinum28Degree\Platinum28Degree;
 
 /**
@@ -9,25 +10,31 @@ use Codzo\Platinum28Degree\Platinum28Degree;
  */
 final class Platinum28DegreeTest extends TestCase
 {
+    protected $config;
+
+    public function setUp()
+    {
+        $this->config = new Config();
+    }
 
     public function testCanUpdateCache()
     {
         $pd = new Platinum28Degree();
 
-        $html = $pd->updateCache();
         $this->assertInternalType(
             'string',
-            $html
+            $pd->updateCache()
         );
     }
 
-    public function testCanGetCacheMTime()
+    public function testCanGetContent()
     {
         $pd = new Platinum28Degree();
 
+        $html = $pd->getContent(true);
         $this->assertInternalType(
-            'int',
-            $pd->getCacheMTime()
+            'string',
+            $html
         );
     }
 
@@ -53,20 +60,18 @@ final class Platinum28DegreeTest extends TestCase
 
     public function testCanHandleWhenCacheNotExist()
     {
-        // del the cache
-        unlink(sys_get_temp_dir() . '/codzo.p28d.cache');
+        $config = new Config();
+        $config->set('cache.enabled', false);
 
-        $pd = new Platinum28Degree();
+        $pd = new Platinum28Degree($config);
 
-        $this->assertFalse(
-            $pd->getCacheMTime()
-        );
-
-        $this->assertFalse(
+        $this->assertInternalType(
+            'array',
             $pd->getAccountSummary()
         );
 
-        $this->assertFalse(
+        $this->assertInternalType(
+            'array',
             $pd->getLatestTransactions()
         );
 

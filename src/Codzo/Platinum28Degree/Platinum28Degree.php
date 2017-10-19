@@ -39,24 +39,38 @@ class Platinum28Degree
 
     /**
      * constructor
+     * @param $config Config the config class
      */
-    public function __construct()
+    public function __construct($config = null)
     {
-        $this->config = new Config(__DIR__ . '/../../../config/');
+        if (!$config) {
+            $this->config = new Config();
+        } else {
+            $this->config = $config;
+        }
     }
 
     /**
-     * Login to 28degree website, retrieve "Home" page and update the cache.
+     * get the web content, either from cache or remote server
      * @param bool $force_reload force to reload the content
      * @return string the html
      */
-    public function loadContent($force_reload = false)
+    public function getContent($force_reload = false)
     {
         // if has cache and it's valid
         if (!$force_reload && $this->isCacheValid()) {
             return file_get_contents($this->getCacheFilePath());
         }
 
+        return $this->updateCache();
+    }
+
+    /**
+     * Login to 28degree website, retrieve "Home" page and update the cache.
+     * @return string the html
+     */
+    public function updateCache()
+    {
         $cookie_file = tempnam(sys_get_temp_dir(), 'codzo.p28d.session.');
 
         // create a new cURL resource
@@ -79,6 +93,8 @@ class Platinum28Degree
         curl_setopt($ch, CURLOPT_URL, self::URL_ACCESS);
         $content = curl_exec($ch);
 
+        $html = '';
+
         // now we have the login page
         if (preg_match_all('/<input.*name=\"(\S*)\".*value=\"(\S*)\"/i', $content, $matches)) {
             // get login form and items
@@ -96,7 +112,6 @@ class Platinum28Degree
             $html = curl_exec($ch);
 
             if ($html) {
-                $this->cached_html = $html;
                 if ($cache_filepath = $this->getCacheFilePath()) {
                     file_put_contents($cache_filepath, $html, LOCK_EX);
                 }
@@ -107,7 +122,7 @@ class Platinum28Degree
         curl_close($ch);
         unlink($cookie_file);
 
-        return $this->cached_html;
+        return $html;
     }
 
     /**
@@ -118,7 +133,7 @@ class Platinum28Degree
     {
         if (preg_match(
             '/retrieveJSON\((\{.*\}\}\})/i',
-            $this->loadContent(),
+            $this->getContent(),
             $matches
         )) {
             $json = json_decode($matches[1], true);
@@ -136,7 +151,7 @@ class Platinum28Degree
     {
         if (preg_match_all(
             '/div name=\"Transaction_([a-zA-Z]*)\">(.+)<\/div/',
-            $this->loadContent(),
+            $this->getContent(),
             $matches
         )) {
             array_walk(
@@ -188,11 +203,6 @@ class Platinum28Degree
         if (is_null($cache_directory)) {
             if ($this->config->get('cache.enabled')) {
                 if ($directory = $this->config->get('cache.directory')) {
-                    if ($directory[0]!='/') {
-                        // this is an relative path. Use the project dir as basedir
-                        $directory = __DIR__ . '/../../../' . $directory;
-                    }
-
                     // directory exists?
                     if (! file_exists($directory)) {
                         mkdir($directory, 0770, true);
