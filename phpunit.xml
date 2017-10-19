@@ -1,4 +1,4 @@
-<phpunit bootstrap="bootstrap.php" >
+<phpunit bootstrap="tests/bootstrap.php" >
 	<testsuites>
 		<testsuite name="all">
             <directory>tests</directory>
@@ -8,6 +8,7 @@
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">tests</directory>
             <exclude>
+                <file>tests/bootstrap.php</file>
                 <directory suffix=".php">tests/config</directory>
             </exclude>
         </whitelist>
