@@ -178,18 +178,30 @@ class Platinum28Degree
     }
 
     /**
+     * get the modify time of cache
+     * @return int timestamp, or false on failure
+     */
+    public function getCacheMTime()
+    {
+        if ($cache_filepath=$this->getCacheFilePath()) {
+            if (is_readable($cache_filepath)) {
+                return filemtime($cache_filepath);
+            }
+        }
+        return false;
+    }
+
+    /**
      * Get the modified timestamp of cache file
      * @return int timestamp, or false on failure
      */
     public function isCacheValid()
     {
-        if ($cache_filepath=$this->getCacheFilePath()) {
-            if (is_readable($cache_filepath)) {
-                $life_time = intval($this->config->get('cache.life-time'));
-                return time() - filemtime($cache_filepath) < $life_time;
-            }
+        $mtime = $this->getCacheMTime();
+        if ($mtime) {
+            $life_time = intval($this->config->get('cache.life-time'));
+            return time() - $mtime < $life_time;
         }
-
         return false;
     }
 
@@ -218,5 +230,16 @@ class Platinum28Degree
         }
         
         return '';
+    }
+
+    /**
+     * Delete cache if exists
+     */
+    public function clearCache()
+    {
+        $cache_filepath = $this->getCacheFilePath();
+        if (file_exists($cache_filepath)) {
+            @unlink($cache_filepath);
+        }
     }
 }

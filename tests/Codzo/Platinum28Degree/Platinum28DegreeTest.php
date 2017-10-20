@@ -36,6 +36,12 @@ final class Platinum28DegreeTest extends TestCase
             'string',
             $html
         );
+
+        $html = $pd->getContent();
+        $this->assertInternalType(
+            'string',
+            $html
+        );
     }
 
     public function testCanGetAccountSummary()
@@ -64,6 +70,7 @@ final class Platinum28DegreeTest extends TestCase
         $config->set('cache.enabled', false);
 
         $pd = new Platinum28Degree($config);
+        $pd->clearCache();
 
         $this->assertInternalType(
             'array',
@@ -77,5 +84,18 @@ final class Platinum28DegreeTest extends TestCase
 
         // restore the cache
         $pd->updateCache();
+    }
+
+    public function testCanGetCacheMTime()
+    {
+        $pd = new Platinum28Degree();
+
+        // make sure there is a cache file
+        $pd->getContent();
+        $this->assertGreaterThanOrEqual($pd->getCacheMTime(), time());
+
+        // now remove the cache file
+        $pd->clearCache();
+        $this->assertFalse($pd->getCacheMTime());
     }
 }
