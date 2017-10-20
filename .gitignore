@@ -1,7 +1,7 @@
 data/*
 tags
 vendor
-reports
+tests/reports/
 config/*
 !config/*.dist
 
