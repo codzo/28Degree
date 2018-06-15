@@ -33,6 +33,11 @@ class Platinum28Degree
     const URL_FORM  = 'https://28degrees-online.latitudefinancial.com.au/fcc/ealogin.fcc';
 
     /**
+     * cache file name
+     */
+    const CACHE_FILE_NAME = 'codzo.p28d.cache';
+
+    /**
      * The Config object
      */
     protected $config;
@@ -57,12 +62,30 @@ class Platinum28Degree
      */
     public function getContent($force_reload = false)
     {
-        // if has cache and it's valid
-        if (!$force_reload && $this->isCacheValid()) {
-            return file_get_contents($this->getCacheFilePath());
+        static $content;
+
+        if ($force_reload) {
+            // delete the cache and content in memory
+            $content = null;
+            $this->clearCache();
         }
 
-        return $this->updateCache();
+        // if has cache and it's valid
+        if ($this->isCacheValid()) {
+            $content = file_get_contents($this->getCacheFilePath());
+        }
+
+        /**
+         * This is called multiple times and if cache disabled,
+         * we will load from remote 28 website for each call.
+         * In this scenario, need to save the content in memory
+         * and record the timestamp of load and expire it accordingly.
+         */
+        if (!$content) {
+            $content = $this->updateCache();
+        }
+
+        return $content;
     }
 
     /**
@@ -226,7 +249,7 @@ class Platinum28Degree
         }
 
         if ($cache_directory) {
-            return $cache_directory . '/codzo.p28d.cache';
+            return $cache_directory . '/' . self::CACHE_FILE_NAME;
         }
         
         return '';
