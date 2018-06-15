@@ -4,7 +4,7 @@
     "description": "Gadget to interact with 28Degree Credit Card Edit",
     "keywords": ["28degree", "credit", "card"],
     "homepage": "https://github.com/codzo/Platinum28Degree",
-    "license": "Apache License",
+    "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "authors": [
