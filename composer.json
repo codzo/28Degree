@@ -20,18 +20,11 @@
         "codzo/config":"*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.4",
-        "codzo/phpcodesniffer-git-hook": "dev-master"
+        "phpunit/phpunit": "^6.4"
     },
     "autoload": {
         "psr-0": {
             "Codzo": "src"
         }
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "rm -rf .git/hooks",
-            "ln -s ../vendor/codzo/phpcodesniffer-git-hook/hooks .git/hooks"
-        ]
     }
 }
